@@ -1,24 +1,28 @@
 <?php
 
-include "configuration/config.php";
+include "./configuration/config.php";
 session_start();
 error_reporting(0);
 
 $instit_user = $_POST['instit-user'];
 $instit_pass = $_POST['instit-pass'];
 
+$incorrectPass;
 
-
-if(isset($_POST['instit-submit']) && isset($_POST['instit-user']) && isset($_POST['instit-pass'])){
-	
+if (isset($_POST['instit-submit']) && isset($_POST['instit-user']) && isset($_POST['instit-pass'])) {
 	$instit_sql = "SELECT * FROM `schools_list` WHERE `schoolusername` = '$instit_user' AND `schoolpassword` = '$instit_pass'";
-
 	$instit_result = mysqli_query($conn, $instit_sql);
-	
-	if($instit_result){
-		$_SESSION['instit'] = $instit_user;
-		header("Location: ./Dashboard/schools/school.dashboard.php");
-	}
+
+	if ($instit_result) {
+		$instit_result_verifier = mysqli_fetch_assoc($instit_result);
+		if ($instit_result_verifier) {
+			$_SESSION['instit'] = $instit_user;
+			header("Location: ./Dashboard/schools/school.dashboard.php");
+		}
+		if(!$instit_result_verifier) {
+			echo "<script>alert('The username or password is incorrect')</script>";
+		}
+	} 
 }
 
 ?>
@@ -65,10 +69,10 @@ if(isset($_POST['instit-submit']) && isset($_POST['instit-user']) && isset($_POS
 						</button>
 
 						<ul class="dropdown-menu">
-							<li><p class="dropdown-item" id="instit-selector" >Institution Login</p></li>
-							<li><p class="dropdown-item" id="student-selector" >Student Login</p></li>
-							<li><p class="dropdown-item" id="teacher-selector" >Teacher Login</p></li>
-							<li><p class="dropdown-item" id="studstat-selector">StudStats Admin Login</p></li>
+							<li><a class="dropdown-item" style="cursor: pointer;" id="instit-selector">Institution Login</a></li>
+							<li><a class="dropdown-item" style="cursor: pointer;" id="student-selector">Student Login</a></li>
+							<li><a class="dropdown-item" style="cursor: pointer;" id="teacher-selector">Teacher Login</a></li>
+							<li><a class="dropdown-item" style="cursor: pointer;" id="studstat-selector">StudStats Admin Login</a></li>
 						</ul>
 					</div>
 
@@ -88,7 +92,7 @@ if(isset($_POST['instit-submit']) && isset($_POST['instit-user']) && isset($_POS
 							</div>
 							<div class="group my-4 ">
 								<div class=" w-100 mx-4 ">
-									
+
 									<button class="colorful-button btn-lg float-end " name='instit-submit' type="submit" value="instit-submit">
 										<div class="wrapper">
 											<span>Submit</span>
@@ -108,6 +112,7 @@ if(isset($_POST['instit-submit']) && isset($_POST['instit-user']) && isset($_POS
 									</button>
 								</div>
 							</div>
+							<?php echo $incorrectPass; ?>
 						</form>
 					</div>
 
@@ -224,6 +229,12 @@ if(isset($_POST['instit-submit']) && isset($_POST['instit-user']) && isset($_POS
 	</div>
 	<script src="./scripts/logins/loginselector.js"></script>
 	<script src="./styles/bootstrap/bootstrap.bundle.min.js"></script>
+	<script>
+		$("form").submit(function() {
+			$.post($(this).attr("action"), $(this).serialize());
+			return false;
+		});
+	</script>
 </body>
 
 </html>
