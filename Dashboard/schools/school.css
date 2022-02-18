@@ -1,65 +1,191 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Ubuntu";
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Ubuntu";
+}
 
-  .side-bar{
-      width: 22.5%;
-      height: 100vh;
-      border-right: 2px solid rgba(177, 177, 177, 0.75);
-  }
+.side-bar {
+  width: 22.5%;
+  height: 100vh;
+  border-right: 2px solid rgba(177, 177, 177, 0.75);
+}
 
-  .main-bar{
-      width: 80%;
-      height: 100vh;
-  }
+.main-bar {
+  width: 80%;
+}
 
-  .profile-photo{
-      width: 3.5em;
-      height: 3.5em;
-      border: 0;
-      border-radius: 7px;
-      box-shadow: 1px 1px 25px 2px rgba(83, 83, 83, 0.3);
-  }
-  
-  .martop{
-      /* margin-top:80px; */
-  }
+.profile-photo {
+  width: 3.5em;
+  height: 3.5em;
+  border: 0;
+  border-radius: 7px;
+  /* box-shadow: 1px 1px 25px 2px rgba(83, 83, 83, 0.3); */
+}
 
-  .school-name{
-      font-size: 1.2em;
-      font-weight: 700;
-  }
+/* .martop {
+  /* margin-top:80px; 
+} */
 
-  .width-90{
-      width: 75%;
-  }
+.school-name {
+  font-size: 1.2em;
+  font-weight: 700;
+}
 
-  .iconer{
-      width: 2.7em;
-      height: 2.7em;
-  }
+.width-90 {
+  width: 75%;
+}
 
-  .nav-tab{
-    border: 0;
-    border-radius: 7px;
-    box-shadow: 2px 2px 75px 2px rgba(83, 83, 83, 0.3);
-  }
+.iconer {
+  width: 2em;
+  height: 2em;
+  padding: 3px;
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
 
-  .nav-tab:hover{
-      animation: scaler;
-      animation-duration: 1s;
-      animation-iteration-count: 1;
-    transition-duration: 1s;
-  }
+.homer {
+  background-image: url("./assets/icons/home-light.png");
+}
 
-  @keyframes scaler {
-      0%{
-          transform: scale(1);
-      }
-      100%{
-          transform: scale(1.05);
-      }
-  }
+.classroomer {
+  background-image: url("./assets/icons/classroom-dark.png");
+}
+
+.examer {
+  background-image: url("./assets/icons/exam-dark.png");
+}
+
+.eventer {
+  background-image: url("./assets/icons/event-dark.png");
+}
+
+.financialer {
+  background-image: url("./assets/icons/financial-inactive.png");
+}
+
+.nav-tab {
+  border: 0;
+  border-radius: 7px;
+  box-shadow: 2px 2px 10px 2px rgba(83, 83, 83, 0.3);
+}
+
+.nav-tab:hover {
+  transform: scale(1.05);
+  transition-duration: 1s;
+}
+.nav-fonter {
+  font-size: 0.85em !important;
+}
+.main-bar {
+  height: 100vh;
+}
+
+.feeder {
+  height: 80vh;
+  border: 0;
+  border-radius: 10px;
+  display: block;
+  overflow: auto;
+}
+
+.postman {
+  height: 15vh;
+  border: 0;
+  border-radius: 10px;
+  width: 100%;
+  margin-left: 10px;
+  padding-bottom: 20px;
+}
+.post-man-input{
+  outline: none;
+  resize: none;
+  margin: 10px;
+  width: 80%;
+  border: 2 solid rgba(83, 83, 83, 0.3);
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 10px rgba(51, 51, 51, 0.1);
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.post-man-btn{
+  width: 15%;
+  font-size: large;
+  font-weight: 700;
+  margin: 10px;
+  margin-top: 20px;
+  color: #fff;
+
+}
+
+.sider {
+  height: 95vh;
+  border: 0;
+  border-radius: 10px;
+}
+
+/* Feeder Area */
+
+.clearfix {
+  overflow: auto;
+  zoom: 1;
+}
+.feed-container {
+  margin: 25px;
+}
+.feed-border {
+  background: #fff;
+  width: 80%;
+  box-shadow: 0px 0px 15px 10px rgba(51, 51, 51, 0.1);
+  border-radius: 10px;
+  margin: 0px 0px;
+}
+
+.feed-content,
+.feed-avatar {
+  float: left;
+}
+.feed-avatar {
+  margin: 10px 10px;
+}
+.feed-content {
+  margin: 20px 5px;
+  width: 80%;
+}
+.feed-avatar img {
+  border-radius: 50%;
+}
+.feed-footer {
+  border-top: solid 1px #e0e0e0;
+  padding-top: 10px;
+  background: #f0f0f0;
+}
+.feed-footer .footer-left {
+  float: left;
+  margin: 0px 15px 10px 15px;
+  font-size: 14px;
+}
+.feed-footer .footer-right {
+  float: right;
+  margin: 0px 15px 10px 0px;
+  font-size: 14px;
+}
+.footer-time {
+  color: #808080;
+  cursor: pointer;
+}
+.feed-footer a {
+  color: #808080;
+}
+.feed-footer a:hover {
+  color: #333;
+}
+.divisor {
+  border-left: solid 1px #b5b5b5;
+  margin-right: 5px;
+  margin-left: 1px;
+}
+
+/* SVG Config Area */
