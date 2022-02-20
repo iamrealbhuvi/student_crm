@@ -34,7 +34,7 @@ $instit_fetched_array = mysqli_fetch_assoc($instit_result);
 
 <body class="d-flex ">
     <!-- This one is for main side bar -->
-    <div class="side-bar d-flex justify-content-center align-items-center bg-dark">
+    <div class="side-bar d-flex justify-content-center  bg-dark">
         <div class="w-100 barlit">
             <!-- profile photo column -->
             <div class="profiler-tab d-flex justify-content-center align-items-center w-75 mx-auto">

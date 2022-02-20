@@ -38,9 +38,10 @@ if(isset($_POST['editbtn'])){
 
 
 <div>
+    
     <!-- Feeder -->
     <div class="mx-3 w-100 feeder">
-
+    <h3 class="text-center ">Institutional Feed</h3>
 
         <div id="feedspot"></div>
 
@@ -90,7 +91,15 @@ if(isset($_POST['editbtn'])){
                 }
             </script>
             <script>
-                // document.getElementById('del-btn-config') = "Delete Post";
+                let delbtn = document.getElementById('del-btn-config');
+                let editbtn = document.getElementById('edit-btn-config');
+
+                <?php
+                if($_SESSION['instit'] !== $instit_fetched_feed_array[0]['postby']){
+                    echo "delbtn.setAttribute('disabled', 'true');";
+                    echo "editbtn.setAttribute('disabled', 'true');";
+                }
+                ?>
             </script>
         </form>
 

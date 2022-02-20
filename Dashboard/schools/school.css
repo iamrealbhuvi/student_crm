@@ -10,6 +10,7 @@
   width: 22.5%;
   height: 100vh;
   border-right: 2px solid rgba(177, 177, 177, 0.75);
+  overflow: auto;
 }
 
 .main-bar {
