@@ -19,10 +19,10 @@ if (isset($_POST['instit-submit']) && isset($_POST['instit-user']) && isset($_PO
 			$_SESSION['instit'] = $instit_user;
 			header("Location: ./Dashboard/schools/school.dashboard.php");
 		}
-		if(!$instit_result_verifier) {
+		if (!$instit_result_verifier) {
 			echo "<script>alert('The username or password is incorrect')</script>";
 		}
-	} 
+	}
 }
 
 ?>
@@ -36,7 +36,7 @@ if (isset($_POST['instit-submit']) && isset($_POST['instit-user']) && isset($_PO
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="og-title" content="StudStats">
 	<meta name="og-description" content="Manage your Educational Institution completely online. Make your students statistics, analytics and progress on online. Plan your classes, exam schedules and declare results online.">
-	<link rel="stylesheet" href="./styles/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="./styles/bootstrap/dist/css/bootstrap.css">
 	<link rel="stylesheet" href="./styles/index.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,10 +45,10 @@ if (isset($_POST['instit-submit']) && isset($_POST['instit-user']) && isset($_PO
 
 <body class="loginer">
 
-	<div class="mx-auto w-50 mt-5 outer">
+	<div class="mx-auto mt-5 outer" style="width: 40%;">
 		<div class="w-100 mx-auto">
 			<div class="w-100  float-end">
-				<div class=" w-100 mx-auto">
+				<div class=" w-75 mx-auto">
 					<div class="btn-group">
 						<button class="colorful-button btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<div class="wrapper">
@@ -121,8 +121,14 @@ if (isset($_POST['instit-submit']) && isset($_POST['instit-user']) && isset($_PO
 						<h3 class="text-dark larger-txt  px-3 ">Student Login</h3>
 						<form action="" class="px-3" method="POST">
 							<div class="group">
-								<label for="user" class="label">Username</label>
-								<input id="user" name="stu-user" type="text" class="input">
+								<div class="d-flex">
+									<label for="code" class="label w-25">Code</label>
+									<label for="user" class="label w-75">Username</label>
+								</div>
+								<div class="d-flex">
+									<input id="code" name="scl-code" type="text" class="input w-25">
+									<input id="user" name="stu-user" type="text" class="input w-75">
+								</div>
 							</div>
 							<div class="group">
 								<label for="pass" class="label">Password</label>
@@ -157,8 +163,15 @@ if (isset($_POST['instit-submit']) && isset($_POST['instit-user']) && isset($_PO
 						<h3 class="text-dark larger-txt  px-3 ">Teacher Login</h3>
 						<form action="" class="px-3" method="POST">
 							<div class="group">
-								<label for="user" class="label">Username</label>
-								<input id="user" name="teacher-user" type="text" class="input">
+								<div class="d-flex">
+									<label for="code" class="label w-25">Code</label>
+									<label for="teacher-user" class="label w-75">Username</label>
+								</div>
+								<div class="d-flex">
+									<input id="code" name="teacher-code" type="text" class="input w-25">
+									<input id="teacher-user" name="teacher-user" type="text" class="input w-75">
+
+								</div>
 							</div>
 							<div class="group">
 								<label for="pass" class="label">Password</label>
@@ -228,13 +241,14 @@ if (isset($_POST['instit-submit']) && isset($_POST['instit-user']) && isset($_PO
 		</div>
 	</div>
 	<script src="./scripts/logins/loginselector.js"></script>
-	<script src="./styles/bootstrap/bootstrap.bundle.min.js"></script>
-	<script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
+	<script src="./styles/bootstrap/dist/js/bootstrap.bundle.js"></script>
+	<!--script>
 		$("form").submit(function() {
 			$.post($(this).attr("action"), $(this).serialize());
 			return false;
 		});
-	</script>
+	</script-->
 </body>
 
 </html>

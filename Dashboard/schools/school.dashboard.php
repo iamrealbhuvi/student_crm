@@ -24,7 +24,7 @@ $instit_fetched_array = mysqli_fetch_assoc($instit_result);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="og-title" content="<?php echo $instit; ?> Management">
-    <link rel="stylesheet" href="../../styles/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../../styles/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="./school.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,7 @@ $instit_fetched_array = mysqli_fetch_assoc($instit_result);
     <div class="side-bar d-flex justify-content-center  bg-dark">
         <div class="w-100 barlit">
             <!-- profile photo column -->
-            <div class="profiler-tab d-flex justify-content-center align-items-center w-75 mx-auto">
+            <div class="profiler-tab d-flex justify-content-center align-items-center w-75 mx-auto mt-3">
                 <img class="profile-photo mx-3" src="../../photostore/institution-profiles/<?php echo $instit_fetched_array['schoolusername']; ?>/<?php echo $instit_fetched_array['schoolprofile'] ?>" />
                 <div class="p-2 text-align-left w-auto">
                     <p class="school-name my-auto text-light mx-2"><?php echo $instit_fetched_array['schoolname'] ?></p>
@@ -118,16 +118,27 @@ $instit_fetched_array = mysqli_fetch_assoc($instit_result);
 
 
         <!-- Right Bar -->
-        <div class="mx-3 bg-warning w-25 sider">
-
-            <div class=""></div>
+        <div class="mx-3 w-25 sider">
+            <a class="text-decoration-none text-dark pt-4 pb-4">
+                <div class="w-75 mx-auto mt-3 mb-3 rounded-3 d-flex justify-content-center align-items-center" style="font-size: 1.2rem; font-weight: 600;">Quick Links</div>
+            </a>
+            <a class="text-decoration-none text-dark " href="#">
+                <div class="bg-dark text-light w-75 mx-auto mt-3 mb-3 rounded-3 d-flex justify-content-center align-items-center bg-light pt-4 pb-4">Exams</div>
+            </a>
+            <a class="text-decoration-none text-dark " href="#">
+                <div class="bg-dark text-light w-75 mx-auto mt-3 mb-3 rounded-3 d-flex justify-content-center align-items-center bg-light pt-4 pb-4">Fees</div>
+            </a>
+            <a class="text-decoration-none text-dark " href="#">
+                <div class="bg-dark text-light w-75 mx-auto mt-3 mb-3 rounded-3 d-flex justify-content-center align-items-center bg-light pt-4 pb-4">Schedule</div>
+            </a>
 
         </div>
     </div>
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
+    <script src="../../styles/bootstrap/dist/js/bootstrap.bundle.js"></script>
 
-    <script src="../../styles/bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
