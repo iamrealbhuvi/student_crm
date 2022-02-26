@@ -28,6 +28,36 @@
   border: 1px solid black;
 }
 
+.data-div-top{
+  height: 15em;
+  width: 15em;
+  box-shadow: 0px 0px 50px 3px rgba(136, 136, 136, 0.8);
+  border-radius: 50%;
+  opacity: 0.75;
+}
+
+.data-div{
+  height: 15em;
+  width: 15em;
+  box-shadow: 0px 0px 50px 3px rgba(136, 136, 136, 0.8);
+  border-radius: 50%;
+  margin-top: 50px;
+  opacity: 0.75;
+}
+
+.data-sub-div{
+  height: 13em;
+  width: 13em;
+  border-radius: 50%;
+}
+
+.used-accs{
+  font-size: 2rem;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 600;
+}
+
+
 
 
 

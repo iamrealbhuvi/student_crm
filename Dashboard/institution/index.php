@@ -11,6 +11,9 @@ $instit_fetch_sql = "SELECT * FROM `schools_list` WHERE `schoolusername` = '$ins
 $instit_result = mysqli_query($conn, $instit_fetch_sql);
 $instit_fetched_array = mysqli_fetch_assoc($instit_result);
 
+$instit_meta_info_sql = "SELECT * FROM `school_account_info` WHERE `schoolusername` = '$instit'";
+$instit_meta_info_result = mysqli_query($conn, $instit_meta_info_sql);
+$instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
 
 
 ?>
@@ -143,7 +146,7 @@ $instit_fetched_array = mysqli_fetch_assoc($instit_result);
                         <div class="responsiveron">
                             <div id="feedspot">
                                 <?php
-                                
+
                                 $ip = $_SERVER['REMOTE_ADDR'];
                                 $ipInfo = file_get_contents('http://ip-api.com/json/' . $ip);
                                 $ipInfo = json_decode($ipInfo);
@@ -186,7 +189,7 @@ $instit_fetched_array = mysqli_fetch_assoc($instit_result);
                                 $instit_feed_result = mysqli_query($conn, $instit_feed_fetch_sql);
                                 $instit_fetched_feed_array = mysqli_fetch_all($instit_feed_result, $mode = MYSQLI_ASSOC);
                                 $encoded_feed_array = json_encode($instit_fetched_feed_array);
-                                
+
                                 ?>
 
 
@@ -324,7 +327,39 @@ $instit_fetched_array = mysqli_fetch_assoc($instit_result);
                     </div>
                 </div>
             </div>
+            <!-- Right side area  -->
+            <div class="col-lg-4 col-md-6 mb-md-0 mb-4 ">
+                <div class="bg-primary data-div-top mx-auto mb-3 m-3 mt-3 d-flex justify-content-center align-items-center">
+                    <div class="data-sub-div bg-white d-flex justify-content-center align-items-center">
+                        <div class="d-block text-center">
+                            <div class="used-accs">
+                            <?php echo $instit_meta_info_array['used_stu_count'] ?>
+                            </div>
+                            <div>
+                                of <?php echo $instit_meta_info_array['total_stu_count'] ?>
+                            </div>
+                            <div class="fs-4 text-dark">Students</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-info data-div mx-auto d-flex justify-content-center align-items-center">
+                    <div class="data-sub-div bg-white d-flex justify-content-center align-items-center">
+                        <div class="d-block text-center">
+                            <div class="used-accs">
+                            <?php echo $instit_meta_info_array['used_staff_count'] ?>
+                            </div>
+                            <div>
+                                of <?php echo $instit_meta_info_array['total_staff_count'] ?>
+                            </div>
+                            <div class="fs-4 text-dark">Staffs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
+        <?php include "./main-naver.php" ?>
 
         <script>
             if (screen.width >= 1200) {
