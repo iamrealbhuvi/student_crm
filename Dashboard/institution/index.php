@@ -11,9 +11,58 @@ $instit_fetch_sql = "SELECT * FROM `schools_list` WHERE `schoolusername` = '$ins
 $instit_result = mysqli_query($conn, $instit_fetch_sql);
 $instit_fetched_array = mysqli_fetch_assoc($instit_result);
 
+
+// Fetch meta info of institute
 $instit_meta_info_sql = "SELECT * FROM `school_account_info` WHERE `schoolusername` = '$instit'";
 $instit_meta_info_result = mysqli_query($conn, $instit_meta_info_sql);
 $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
+
+
+//  Feed Related Area
+
+$ip = $_SERVER['REMOTE_ADDR'];
+$ipInfo = file_get_contents('http://ip-api.com/json/' . $ip);
+$ipInfo = json_decode($ipInfo);
+$timezone = $ipInfo->timezone;
+date_default_timezone_set($timezone);
+
+$curr_date = date("d-m-Y");
+$curr_time = date("h:ia");
+
+$postername = $instit_fetched_array['schoolname'];
+$_SESSION['schoolusername'] = $instit_fetched_array['schoolusername'];
+
+if (isset($_POST['postsub']) && isset($_POST['postinpdata'])) {
+    $post_inp_data = $_POST['postinpdata'];
+    $postsub = $_POST['postsub'];
+    $post_add_to_db_sql = "INSERT INTO $instit" . "_feeder ( `postby`, `posttime`, `postdate`, `postcontent`, `postername` ) VALUES (\"$instit\",\"$curr_time\",\"$curr_date\",\"$post_inp_data\", \"$postername\")";
+    $post_request_init = mysqli_query($conn, $post_add_to_db_sql);
+}
+
+if (isset($_POST['deletebtn'])) {
+    $value_delete = $_POST['deletebtn'];
+    echo "<script>console.log('$value_delete')</script>";
+    $post_del_sql = "DELETE FROM `sampleschooltpr_feeder` WHERE `id`='$value_delete'";
+    $post_del_req = mysqli_query($conn, $post_del_sql);
+}
+
+if (isset($_POST['editbtn'])) {
+    $_SESSION['editid'] = $_POST['editbtn'];
+    echo '<script>window.location.replace("./editpost/editpost.php");</script>';
+}
+
+$GLOBALS['feed_start'] = 1;
+$fetch_start = $GLOBALS['feed_start'];
+$GLOBALS['feed_fetch_limit'] = 50;
+$fetch_end = $GLOBALS['feed_fetch_limit'];
+if ($fetch_start == 1) {
+    $instit_feed_fetch_sql = "SELECT * FROM $instit" . "_feeder ORDER BY `id` DESC LIMIT $fetch_end;";
+}
+
+$instit_feed_result = mysqli_query($conn, $instit_feed_fetch_sql);
+$instit_fetched_feed_array = mysqli_fetch_all($instit_feed_result, $mode = MYSQLI_ASSOC);
+$encoded_feed_array = json_encode($instit_fetched_feed_array);
+
 
 
 ?>
@@ -62,7 +111,7 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white active bg-gradient-secondary" href="../pages/dashboard.html">
+                    <a class="nav-link text-white active bg-gradient-secondary" href="./index.php">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
@@ -91,6 +140,14 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                             <i class="material-icons opacity-10">class</i>
                         </div>
                         <span class="nav-link-text ms-1">Classrooms</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark " href="./students/index.php">
+                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">people</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Students</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -145,56 +202,7 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                     <div class="card-body px-0 pb-2">
                         <div class="responsiveron">
                             <div id="feedspot">
-                                <?php
-
-                                $ip = $_SERVER['REMOTE_ADDR'];
-                                $ipInfo = file_get_contents('http://ip-api.com/json/' . $ip);
-                                $ipInfo = json_decode($ipInfo);
-                                $timezone = $ipInfo->timezone;
-                                date_default_timezone_set($timezone);
-
-                                $curr_date = date("d-m-Y");
-                                $curr_time = date("h:ia");
-
-                                $postername = $instit_fetched_array['schoolname'];
-                                $_SESSION['schoolusername'] = $instit_fetched_array['schoolusername'];
-
-                                if (isset($_POST['postsub']) && isset($_POST['postinpdata'])) {
-                                    $post_inp_data = $_POST['postinpdata'];
-                                    $postsub = $_POST['postsub'];
-                                    $post_add_to_db_sql = "INSERT INTO $instit" . "_feeder ( `postby`, `posttime`, `postdate`, `postcontent`, `postername` ) VALUES (\"$instit\",\"$curr_time\",\"$curr_date\",\"$post_inp_data\", \"$postername\")";
-                                    $post_request_init = mysqli_query($conn, $post_add_to_db_sql);
-                                }
-
-                                if (isset($_POST['deletebtn'])) {
-                                    $value_delete = $_POST['deletebtn'];
-                                    echo "<script>console.log('$value_delete')</script>";
-                                    $post_del_sql = "DELETE FROM `sampleschooltpr_feeder` WHERE `id`='$value_delete'";
-                                    $post_del_req = mysqli_query($conn, $post_del_sql);
-                                }
-
-                                if (isset($_POST['editbtn'])) {
-                                    $_SESSION['editid'] = $_POST['editbtn'];
-                                    echo '<script>window.location.replace("./editpost/editpost.php");</script>';
-                                }
-
-                                $GLOBALS['feed_start'] = 1;
-                                $fetch_start = $GLOBALS['feed_start'];
-                                $GLOBALS['feed_fetch_limit'] = 50;
-                                $fetch_end = $GLOBALS['feed_fetch_limit'];
-                                if ($fetch_start == 1) {
-                                    $instit_feed_fetch_sql = "SELECT * FROM $instit" . "_feeder ORDER BY `id` DESC LIMIT $fetch_end;";
-                                }
-
-                                $instit_feed_result = mysqli_query($conn, $instit_feed_fetch_sql);
-                                $instit_fetched_feed_array = mysqli_fetch_all($instit_feed_result, $mode = MYSQLI_ASSOC);
-                                $encoded_feed_array = json_encode($instit_fetched_feed_array);
-
-                                ?>
-
-
                             </div>
-
                         </div>
                         <div class=" mx-2 my-2 fs-5" style="font-weight: 500;">
                             <form id="post-form" class="form-inline d-flex " method="POST">
@@ -265,7 +273,7 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                         <div class=" w-auto  max-height-vh-100" id="sidenav-collapse-main">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link text-white active bg-gradient-secondary d-flex rounded-3" href="../pages/dashboard.html">
+                                    <a class="nav-link text-white active bg-gradient-secondary d-flex rounded-3" href="./students/index.php">
                                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                             <i class="material-icons opacity-10 ms-3">dashboard</i>
                                         </div>
@@ -294,6 +302,14 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                                             <i class="material-icons opacity-10 ms-3">class</i>
                                         </div>
                                         <span class="nav-link-text ms-1">Classrooms</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark d-flex rounded-3 " href="./students/index.php">
+                                        <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                                            <i class="material-icons opacity-10 ms-3">people</i>
+                                        </div>
+                                        <span class="nav-link-text ms-1">Students</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -333,7 +349,7 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                     <div class="data-sub-div bg-white d-flex justify-content-center align-items-center">
                         <div class="d-block text-center">
                             <div class="used-accs">
-                            <?php echo $instit_meta_info_array['used_stu_count'] ?>
+                                <?php echo $instit_meta_info_array['used_stu_count'] ?>
                             </div>
                             <div>
                                 of <?php echo $instit_meta_info_array['total_stu_count'] ?>
@@ -346,7 +362,7 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                     <div class="data-sub-div bg-white d-flex justify-content-center align-items-center">
                         <div class="d-block text-center">
                             <div class="used-accs">
-                            <?php echo $instit_meta_info_array['used_staff_count'] ?>
+                                <?php echo $instit_meta_info_array['used_staff_count'] ?>
                             </div>
                             <div>
                                 of <?php echo $instit_meta_info_array['total_staff_count'] ?>
