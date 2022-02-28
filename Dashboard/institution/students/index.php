@@ -143,7 +143,51 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
             </div>
         </div>
 
-        
+        <div class="container-fluid mb-3">
+            <div class="header-body">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-6">
+                        <a class="text-decoration-none" href="./createstudent/">
+                            <div class="card card-stats mb-4 mb-xl-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="card-title font-weight-bold  mb-0">Create</h5>
+                                            <span class="h5 font-weight-bold mb-0">Student</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-info text-white rounded-circle shadow text-center">
+                                                <i class="fas fa-plus"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <a class="text-decoration-none" href="./editstudent/">
+                            <div class="card card-stats mb-4 mb-xl-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="card-title font-weight-bold  mb-0">Edit</h5>
+                                            <span class="h5 font-weight-bold mb-0">Student</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-primary text-white rounded-circle shadow text-center">
+                                                <i class="fas fa-edit"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
