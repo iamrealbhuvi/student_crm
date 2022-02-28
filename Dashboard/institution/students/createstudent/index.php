@@ -131,28 +131,32 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                     <!-- Replica Start -->
 
                     <div class="row container mx-auto mt-4">
-                        <div class="card card-stats mb-4 mb-xl-0 col-xl-5 col-lg-6 col-sm-12">
-                            <div class="card-body d-flex align-items-center">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <h5 class="card-title font-weight-bold  mb-0">Student Name</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="" id="stu-roll" placeholder="Ashwin Ravi S" name="stuname" />
+                        <div class="col-xl-5 col-lg-6 col-sm-12 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 class="card-title font-weight-bold  mb-0">Student Name</h5>
+                                        </div>
+                                        <div class="col-12">
+                                            <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="" id="stu-roll" placeholder="Ashwin Ravi S" name="stuname" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block row">
+                        <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
                         </div>
-                        <div class="card card-stats mb-4 mb-xl-0 col-xl-5 col-lg-6 col-sm-12">
-                            <div class="card-body d-flex align-items-center">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <h5 class="card-title font-weight-bold  mb-0">Student Father Name</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="" id="stu-roll" placeholder="Sampath Kumar" name="stufathername" />
+                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 class="card-title font-weight-bold  mb-0">Student Father Name</h5>
+                                        </div>
+                                        <div class="col-12">
+                                            <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="" id="stu-roll" placeholder="Sampath Kumar" name="stufathername" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
