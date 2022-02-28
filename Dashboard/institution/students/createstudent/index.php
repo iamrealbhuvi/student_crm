@@ -60,7 +60,7 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
             </div>
         </div>
         <div class="mb-3">
-            <form action="" method="POST">
+            <form action="" method="POST" style="padding-bottom: 3em;" oninput="jsonupdater()">
                 <div class="row mb-4 mt-4 mx-auto my-3 ">
                     <div class="col-lg-11 col-md-11 mb-md-0 mb-4 text-left fs-5 font-weight-bolder text-dark mx-auto">
                         <div>Student Main Inforamtion</div>
@@ -73,12 +73,12 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
-                                            <h5 class="card-title font-weight-bold  mb-0">Student Roll Number</h5>
+                                            <h5 class="card-title font-weight-bold  mb-0">Student Roll Number <span style="color: red;">&ast;</span></h5>
 
                                         </div>
                                         <div class="col-12">
                                             <div class="upload-btn-wrapper">
-                                                <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="" id="stu-roll" placeholder="<?php echo $instit_fetched_array['schoolidcode'] ?>012001" name="sturoll" />
+                                                <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="" id="stu-roll" placeholder="<?php echo $instit_fetched_array['schoolidcode'] ?>012001" name="sturoll" required />
                                             </div>
                                         </div>
                                     </div>
@@ -88,12 +88,12 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
-                                            <h5 class="card-title font-weight-bold  mb-0">Student Photo</h5>
+                                            <h5 class="card-title font-weight-bold  mb-0">Student Photo <span style="color: red;">&ast;</span></h5>
                                         </div>
                                         <div class="col-12">
                                             <div class="upload-btn-wrapper">
                                                 <button class="btn-up">Upload a file</button>
-                                                <input type="file" name="myprofile" id="profile-pic" />
+                                                <input type="file" name="myprofile" id="profile-pic" required />
                                             </div>
                                         </div>
                                     </div>
@@ -118,9 +118,11 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
 
                                 if (imgup) {
                                     imgup.onchange = evt => {
-                                        const [file] = imgup.files
+                                        let [file] = imgup.files
                                         if (file) {
-                                            img.src = URL.createObjectURL(file)
+
+                                            img.src = URL.createObjectURL(file);
+
                                         }
                                     }
                                 }
@@ -130,16 +132,17 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
 
                     <!-- Replica Start -->
 
+                    <!-- Layer 1 start -->
                     <div class="row container mx-auto mt-4">
-                        <div class="col-xl-5 col-lg-6 col-sm-12 row">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 row ">
                             <div class="card card-stats mb-4 mb-xl-0 col-12">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
-                                            <h5 class="card-title font-weight-bold  mb-0">Student Name</h5>
+                                            <h5 class="card-title font-weight-bold  mb-0">Student Name <span style="color: red;">&ast;</span></h5>
                                         </div>
                                         <div class="col-12">
-                                            <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="" id="stu-roll" placeholder="Ashwin Ravi S" name="stuname" />
+                                            <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="" id="stu-name" placeholder="Ashwin Ravi S" name="stuname" required />
                                         </div>
                                     </div>
                                 </div>
@@ -152,10 +155,64 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
-                                            <h5 class="card-title font-weight-bold  mb-0">Student Father Name</h5>
+                                            <h5 class="card-title font-weight-bold  mb-0">Student Father Name <span style="color: red;">&ast;</span></h5>
                                         </div>
                                         <div class="col-12">
-                                            <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="" id="stu-roll" placeholder="Sampath Kumar" name="stufathername" />
+                                            <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="" id="stu-fa-name" placeholder="Sampath Kumar" name="stufathername" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Layer 1 End -->
+
+                    <!-- Replica end -->
+
+                    <div class="row mb-4 mt-4 mx-auto my-3 ">
+                        <div class="col-lg-11 col-md-11 mb-md-0 mb-4 text-left fs-5 font-weight-bolder text-dark mx-auto">
+                            <div>Student Biological Inforamtion</div>
+                        </div>
+                    </div>
+
+                    <!-- Layer 2 start -->
+                    <div class="row container mx-auto mt-4">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 row ">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 class="card-title font-weight-bold  mb-0">Student's Mother Name<span style="color: red;">&ast;</span></h5>
+                                        </div>
+                                        <div class="col-12">
+                                            <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="" id="stu-ma-name" placeholder="Preethi Ravi" name="stumomname" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
+                        </div>
+                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 class="card-title font-weight-bold  mb-0">Student's Blood Group <span style="color: red;">&ast;</span></h5>
+                                        </div>
+                                        <div class="col-12">
+
+                                            <select style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" class="form-control rounded-25" id="stu-bld-grp" name="stufathername" required>
+                                                <option> Select Blood Group</option>
+                                                <option value="O +ve">O +ve</option>
+                                                <option value="O -ve">O -ve</option>
+                                                <option value="A +ve">A +ve</option>
+                                                <option value="A -ve">A -ve</option>
+                                                <option value="B +ve">B +ve</option>
+                                                <option value="B -ve">B -ve</option>
+                                                <option value="AB +ve">AB +ve</option>
+                                                <option value="AB -ve">AB -ve</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -163,9 +220,84 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                         </div>
                     </div>
 
-                    <!-- Replica end -->
+                    <!-- Layer 2 end -->
+
+                    <!-- Layer 3 start -->
+                    <div class="row container mx-auto mt-4">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 row ">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 class="card-title font-weight-bold  mb-0">Student Date of Birth <span style="color: red;">&ast;</span></h5>
+                                        </div>
+                                        <div class="col-12">
+                                            <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="date" value="" id="stu-dob" placeholder="01/01/2001" name="studob" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
+                        </div>
+                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 class="card-title font-weight-bold  mb-0">Student with Disability</h5>
+                                        </div>
+                                        <div class="col-12 row">
+                                            <div class="col-1 form-check my-auto" style="width: 30px;">
+                                                <input style="width: 30px;" class="form-check-input rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="checkbox" value="yes" id="stu-pwd" name="stu-pwd" />
+                                            </div>
+                                            <div class="col-10 ms-3">
+                                                <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="" id="stu-pwd-issue" placeholder="Type Your Issue" name="stupwdissue" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Layer 3 End -->
 
                 </div>
+
+                <textarea rows="5" class="d-none" id="final-out" name="submission_data">
+
+                </textarea>
+                <script>
+                    let rollnum = document.getElementById('stu-roll');
+                    let stuName = document.getElementById('stu-name');
+                    let stuFaName = document.getElementById('stu-fa-name');
+                    let stuMaName = document.getElementById('stu-ma-name');
+                    let stuBldGrp = document.getElementById('stu-bld-grp');
+                    let stuDob = document.getElementById('stu-dob');
+                    let stuPwd = document.getElementById('stu-pwd');
+                    let stuPwdIssue = document.getElementById('stu-pwd-issue');
+                    
+
+
+                    let mangamadaya = {}
+
+                    function jsonupdater() {
+                        mangamadaya = {
+                            roll: rollnum.value,
+                            name: stuName.value,
+                            father: stuFaName.value,
+                            mother: stuMaName.value,
+                            bloodgrp: stuBldGrp.value,
+                            dob: stuDob.value,
+                            pwdSts: stuPwd.value,
+                            pwdIssue: stuPwdIssue.value,
+
+                        }
+
+                        console.log(mangamadaya);
+                    }
+                </script>
+
             </form>
         </div>
     </main>

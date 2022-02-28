@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 19, 2022 at 06:53 PM
+-- Generation Time: Feb 28, 2022 at 08:38 PM
 -- Server version: 10.6.5-MariaDB-2
 -- PHP Version: 8.1.2
 
@@ -59,8 +59,38 @@ INSERT INTO `sampleschooltpr_feeder` (`id`, `postby`, `postername`, `posttime`, 
 (14, 'sampleschooltpr', 'Sample Senior International School', '04:54pm', '18-02-2022', 'Internet Server Verification status done!!!', 0, '[]'),
 (15, 'sampleschooltpr', 'Sample Senior International School', '03:12pm', '19-02-2022', 'Happy Weekend', 0, '[]'),
 (16, 'sampleschooltpr', 'Sample Senior International School', '03:14pm', '19-02-2022', 'Tuesday in our school we planned an eye test camp. Don\'t Take leave...', 0, '[]'),
-(17, 'sampleschooltpr', 'Sample Senior International School', '03:14pm', '19-02-2022', 'Thanks', 0, '[]'),
-(19, 'sampleschooltpr', 'Sample Senior International School', '03:19pm', '19-02-2022', 'quiero dinero mas mas mas ', 0, '[]');
+(21, 'sampleschooltpr', 'Sample Senior International School', '04:51pm', '20-02-2022', 'aadharsh oru kirukan\r\n', 0, '[]'),
+(22, 'sampleschooltpr', 'Sample Senior International School', '03:12pm', '23-02-2022', 'Para paraiso de aventura por mi alma prisionera.', 0, '[]'),
+(25, 'sampleschooltpr', 'Sample Senior International School', '08:14pm', '23-02-2022', 'Screen resize check confirmed ✅', 0, '[]');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sampleschooltpr_students`
+--
+
+CREATE TABLE `sampleschooltpr_students` (
+  `id` int(15) NOT NULL,
+  `rollnumber` varchar(11) NOT NULL DEFAULT '0',
+  `student_name` varchar(200) NOT NULL DEFAULT 'name not mentioned',
+  `search_keyword` varchar(150) NOT NULL,
+  `photo_name` varchar(500) NOT NULL,
+  `class` varchar(10) NOT NULL,
+  `class_status` varchar(10) NOT NULL,
+  `edu_group` varchar(23) NOT NULL,
+  `dob` varchar(14) NOT NULL,
+  `blood_group` varchar(5) NOT NULL,
+  `address` varchar(1000) NOT NULL,
+  `father_name` varchar(150) NOT NULL,
+  `mother_name` varchar(150) NOT NULL,
+  `contact_1` varchar(20) NOT NULL,
+  `contact_2` varchar(20) NOT NULL DEFAULT 'Not Mentioned',
+  `annual_income` varchar(25) NOT NULL,
+  `cared_by` varchar(10) NOT NULL,
+  `academic_year` varchar(25) NOT NULL,
+  `account_status` varchar(11) NOT NULL,
+  `stu_pass` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -89,6 +119,34 @@ CREATE TABLE `schools_list` (
 INSERT INTO `schools_list` (`id`, `schoolname`, `schoolusername`, `schoolpassword`, `schooladdress`, `schoolphonenumber1`, `schoolphonenumber2`, `premiumstatus`, `joindate`, `schoolidcode`, `schoolprofile`) VALUES
 (1, 'Sample Senior International School', 'sampleschooltpr', 'sampleschool@123', 'Sample School, 15 Velamplayam, Tirupur', '9876543210', '9012345678', 'active', '12/02/2022', 'SMPL', 'sampleschooltpr.png');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `school_account_info`
+--
+
+CREATE TABLE `school_account_info` (
+  `id` int(250) NOT NULL,
+  `schoolusername` varchar(200) NOT NULL,
+  `join_date` varchar(50) NOT NULL,
+  `renewal_date` varchar(50) NOT NULL,
+  `expiration_date` varchar(50) NOT NULL,
+  `total_stu_count` int(50) NOT NULL DEFAULT 0,
+  `used_stu_count` int(50) NOT NULL DEFAULT 0,
+  `per_stu_price` int(10) NOT NULL DEFAULT 0,
+  `total_staff_count` int(50) NOT NULL DEFAULT 0,
+  `used_staff_count` int(50) NOT NULL DEFAULT 0,
+  `per_staff_price` int(10) NOT NULL DEFAULT 0,
+  `total_classrooms` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `school_account_info`
+--
+
+INSERT INTO `school_account_info` (`id`, `schoolusername`, `join_date`, `renewal_date`, `expiration_date`, `total_stu_count`, `used_stu_count`, `per_stu_price`, `total_staff_count`, `used_staff_count`, `per_staff_price`, `total_classrooms`) VALUES
+(1, 'sampleschooltpr', '14/02/2022', '14/02/2022', '14/02/2023', 1400, 10, 15, 150, 3, 25, 0);
+
 --
 -- Indexes for dumped tables
 --
@@ -100,9 +158,21 @@ ALTER TABLE `sampleschooltpr_feeder`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sampleschooltpr_students`
+--
+ALTER TABLE `sampleschooltpr_students`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `schools_list`
 --
 ALTER TABLE `schools_list`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `school_account_info`
+--
+ALTER TABLE `school_account_info`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -113,13 +183,25 @@ ALTER TABLE `schools_list`
 -- AUTO_INCREMENT for table `sampleschooltpr_feeder`
 --
 ALTER TABLE `sampleschooltpr_feeder`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `sampleschooltpr_students`
+--
+ALTER TABLE `sampleschooltpr_students`
+  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `schools_list`
 --
 ALTER TABLE `schools_list`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `school_account_info`
+--
+ALTER TABLE `school_account_info`
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
