@@ -29,8 +29,10 @@
     left: 0;
     top: 0;
     opacity: 0;
-    
+  }
 
+  .guardian-blk{
+    display: none;
   }
 
 
