@@ -18,6 +18,47 @@ $instit_meta_info_result = mysqli_query($conn, $instit_meta_info_sql);
 $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
 
 
+//Receiving data
+if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_POST['submit'])) {
+
+    $data_recv = $_POST['submission_data'];
+    $newdata = json_decode($data_recv, true, 1024);
+    $roller = $newdata['roll'];
+
+    // School Students table connection establishment and checks for a student is there or not
+    $school_students_sql = "SELECT * FROM $instit" . "_students WHERE `rollnumber` = \" $roller \" ;";
+    $students_fetch_result = mysqli_query($conn, $school_students_sql);
+    $students_fetch = mysqli_num_rows($students_fetch_result);
+
+    if ($students_fetch > 0) {
+        echo "<script>alert('Student Already Exists')</script>";
+    } else {
+        // Registration Backend Starts Here
+
+        //Creating a directory  that particular student's data
+        mkdir("/var/www/student_crm/data/students/$instit/$roller", 0777, TRUE);
+        include "./scripts/picture_up.php";
+
+        
+
+
+
+
+
+
+
+
+
+        echo "<script>console.log('sucess point   ". $_SERVER['DOCUMENT_ROOT']."')</script>";
+    }
+}
+
+
+//To create a table student[roll]_examinfo with [ examname, subject, score ]
+//To create a table student[roll]_class_performance [ present, present_date, absence, absence_date, class_status ]
+//To create a table student[roll]_report_card [ examname, report_card_url ]
+//To create a table student[roll]_extras [ heading, content ]
+
 
 
 ?>
@@ -60,7 +101,7 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
             </div>
         </div>
         <div class="mb-3">
-            <form action="" method="POST" style="padding-bottom: 3em;" oninput="jsonupdater()">
+            <form action="" method="POST" style="padding-bottom: 3em;" oninput="jsonupdater()" onload="jsonupdater()">
                 <div class="row mb-4 mt-4 mx-auto my-3 ">
                     <div class="col-lg-11 col-md-11 mb-md-0 mb-4 text-left fs-5 font-weight-bolder text-dark mx-auto">
                         <div>Student Main Inforamtion</div>
@@ -249,19 +290,19 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                                         </div>
                                         <div class="col-12 row">
                                             <div class="col-1 form-check my-auto" style="width: 30px;">
-                                                <input class="form-check-input rounded-25" style="width: 30px; height: 30px;border: 1px solid rgba(50, 50, 50, 1);" type="checkbox" value="" id="stu-pwd"  name="stu-pwd" />
+                                                <input class="form-check-input rounded-25" style="width: 30px; height: 30px;border: 1px solid rgba(50, 50, 50, 1);" type="checkbox" value="" id="stu-pwd" name="stu-pwd" onclick="pwdchecker()" onchange="pwdchecker()" onforminput="pwdchecker()" />
                                                 <script>
-                                                    
-                                                        pwd = document.getElementById("stu-pwd");
+                                                    pwd = document.getElementById("stu-pwd");
+                                                    pwd.value = "no";
+                                                    const pwdchecker = () => {
                                                         setInterval(() => {
-                                                            if(!pwd.checked){
+                                                            if (pwd.checked == true) {
                                                                 pwd.value = "yes"
                                                             } else {
                                                                 pwd.value = "no"
                                                             }
                                                         }, 1000)
-                                                        
-                                                    
+                                                    }
                                                 </script>
                                             </div>
                                             <div class="col-10 ms-3">
@@ -429,7 +470,7 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                                             <h5 class="card-title font-weight-bold  mb-0">Student Contact Number 1 <span style="color: red;">&ast;</span></h5>
                                         </div>
                                         <div class="col-12">
-                                            <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="number" value="" id="stu-cont-1" placeholder="9876543210" name="stucontnum1" required />
+                                            <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="tel" value="" id="stu-cont-1" placeholder="9876543210" name="stucontnum1" required />
                                         </div>
                                     </div>
                                 </div>
@@ -445,7 +486,7 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                                             <h5 class="card-title font-weight-bold  mb-0">Student Contact Number 2 <span style="color: red;">&ast;</span></h5>
                                         </div>
                                         <div class="col-12">
-                                            <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="number" value="" id="stu-cont-2" placeholder="9753186420" name="stucontnum2" required />
+                                            <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="tel" value="" id="stu-cont-2" placeholder="9753186420" name="stucontnum2" required />
                                         </div>
                                     </div>
                                 </div>
@@ -702,7 +743,7 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                     <div class="row mb-4 mt-4 mx-auto my-3 ">
                         <div class="col-lg-12 col-md-12 mb-md-0 mb-4 text-center fs-5 font-weight-bolder text-dark mx-auto">
                             <div>
-                                <input class="btn btn-hover bg-gradient-info " type="submit" value="submit" name="submit" onclick="jsonsubmitter()" style="padding-left: 30px; padding-right: 30px; padding-top: 10px; padding-bottom: 10px;" />
+                                <input class="btn btn-hover bg-gradient-info " id="subbtn" type="submit" value="submit" name="submit" onclick="jsonsubmitter()" style="padding-left: 30px; padding-right: 30px; padding-top: 10px; padding-bottom: 10px;" />
                             </div>
                         </div>
                     </div>
@@ -711,81 +752,7 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                 </div>
 
                 <textarea class="d-none" id="final-out" value="" name="submission_data"></textarea>
-                <script>
-                    let rollnum = document.getElementById('stu-roll');
-                    let stuName = document.getElementById('stu-name');
-                    let stuFaName = document.getElementById('stu-fa-name');
-                    let stuMaName = document.getElementById('stu-ma-name');
-                    let stuBldGrp = document.getElementById('stu-bld-grp');
-                    let stuDob = document.getElementById('stu-dob');
-                    let stuPwd = document.getElementById('stu-pwd');
-                    let stuPwdIssue = document.getElementById('stu-pwd-issue');
-                    let stuIdMark1 = document.getElementById('stu-id-mark-1');
-                    let stuIdMark2 = document.getElementById('stu-id-mark-2');
-                    let stuCont1 = document.getElementById('stu-cont-1');
-                    let stuCont2 = document.getElementById('stu-cont-2');
-                    let stuAddr = document.getElementById('stu-addr');
-                    let stuClass = document.getElementById('stu-class');
-                    let stuEduGrp = document.getElementById('stu-edu-grp');
-                    let stuAcaYear = document.getElementById('stu-aca-year');
-                    let stuPass = document.getElementById('stu-pass');
-                    let stuFaQual = document.getElementById('stu-fa-edu-qual');
-                    let stuMaQual = document.getElementById('stu-ma-edu-qual');
-                    let stuFaOccuType = document.getElementById('stu-fa-occu-type');
-                    let stuMaOccuType = document.getElementById('stu-ma-occu-type');
-                    let stuFaOccu = document.getElementById('stu-fa-occu');
-                    let stuMaOccu = document.getElementById('stu-ma-occu');
-                    let stuAnnInc = document.getElementById('stu-ann-inc');
-                    let stuCaredBy = document.getElementById('stu-parent-less');
-                    let guardianName = document.getElementById('stu-gua-name');
-                    let guardianCont = document.getElementById('stu-gua-cont');
-
-
-                    let finalout = document.getElementById('final-out');
-
-                    let mangamadaya = {}
-
-                    function jsonupdater() {
-                        mangamadaya = {
-                            roll: rollnum.value,
-                            name: stuName.value,
-                            father: stuFaName.value,
-                            mother: stuMaName.value,
-                            bloodgrp: stuBldGrp.value,
-                            dob: stuDob.value,
-                            pwdSts: stuPwd.value,
-                            pwdIssue: stuPwdIssue.value,
-                            idmark1: stuIdMark1.value,
-                            idmark2: stuIdMark2.value,
-                            stuclass: stuClass.value,
-                            stuedugrp: stuEduGrp.value,
-                            stuacayear: stuAcaYear.value,
-                            stupass: stuPass.value,
-                            stucont1: stuCont1.value,
-                            stucont2: stuCont2.value,
-                            stuaddr: stuAddr.value,
-                            stufaqual: stuFaQual.value,
-                            stumaqual: stuMaQual.value,
-                            stufaoccutype: stuFaOccuType.value,
-                            stumaoccutype: stuMaOccuType.value,
-                            stufaoccu: stuFaOccu.value,
-                            stumaoccu: stuMaOccu.value,
-                            stuanninc: stuAnnInc.value,
-                            stucaredby: stuCaredBy.value,
-                            guardianname: guardianName.value,
-                            guardiancont: guardianCont.value,
-
-                        }
-
-                        console.log(mangamadaya);
-                    }
-
-                    function jsonsubmitter() {
-                        finalout.value = JSON.stringify(mangamadaya);
-                        console.log("final value from final out: ");
-                        console.log(finalout.value);
-                    }
-                </script>
+                <script src="./script.js"></script>
 
             </form>
         </div>
