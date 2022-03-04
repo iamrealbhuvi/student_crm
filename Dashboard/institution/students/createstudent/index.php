@@ -38,28 +38,32 @@ if (isset($_FILES['myprofile']) && isset($_POST['submission_data']) && isset($_P
 
         //Creating a directory  that particular student's data
         mkdir("/var/www/student_crm/data/students/$instit/$roller", 0777, TRUE);
-
         $path_to = "/var/www/student_crm/data/students/$instit/$roller/";
-
         include "./scripts/picture_up.php";
-
         $picname = $roller . $curr_date . $curr_time . '.' . $imageFileType;
-        
         include "./scripts/uploader.php";
 
 
 
+        // Creaation of table student[roll]_examinfo with [ examname, subject, score ]
+        $examinfo_tbl_sql = "CREATE TABLE `studstat`.`" . $newdata['roll'] . "_examinfo` ( `id` INT(100) NOT NULL AUTO_INCREMENT , `examname` VARCHAR(600) NOT NULL , `subject` VARCHAR(100) NOT NULL , `score` VARCHAR(100) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+        $examinfo_tbl_query = mysqli_query($conn, $examinfo_tbl_sql);
+
+        // Creation of table student[roll]_class_performance [ present, present_date, absence, absence_date, class_status ]
+        $clsperf_tbl_sql = "CREATE TABLE `studstat`.`" . $newdata['roll'] . "_class_performance` ( `id` INT(100) NOT NULL AUTO_INCREMENT , `present` VARCHAR(600) NOT NULL , `present_date` VARCHAR(100) NOT NULL , `absent` VARCHAR(100) NOT NULL , `absent_date` VARCHAR(100) NOT NULL , `class_status` VARCHAR(120) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+        $clsperf_tbl_query = mysqli_query($conn, $clsperf_tbl_sql);
+
+        //Creation of table student[roll]_report_card [ examname, report_card_url ]
+        $rep_tbl_sql = "CREATE TABLE `studstat`.`" . $newdata['roll'] . "_report_card` ( `id` INT(100) NOT NULL AUTO_INCREMENT , `examname` VARCHAR(600) NOT NULL , `report_url` VARCHAR(500) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+        $rep_tbl_query = mysqli_query($conn, $rep_tbl_sql);
+
+        // Creation of table student[roll]_extras [ heading, content ]
+        $ext_tbl_sql = "CREATE TABLE `studstat`.`" . $newdata['roll'] . "_extras` ( `id` INT(100) NOT NULL AUTO_INCREMENT , `heading` VARCHAR(600) NOT NULL , `content` VARCHAR(500) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+        $ext_tbl_query = mysqli_query($conn, $ext_tbl_sql);
+
+
         echo "<script>console.log('success point')</script>";
         echo "<script>console.log('sucess point... 2')</script>";
-
-        
-
-
-
-
-
-
-
 
 
 
@@ -69,9 +73,9 @@ if (isset($_FILES['myprofile']) && isset($_POST['submission_data']) && isset($_P
 }
 
 
-//To create a table student[roll]_examinfo with [ examname, subject, score ]
-//To create a table student[roll]_class_performance [ present, present_date, absence, absence_date, class_status ]
-//To create a table student[roll]_report_card [ examname, report_card_url ]
+
+
+
 //To create a table student[roll]_extras [ heading, content ]
 
 
@@ -112,7 +116,7 @@ if (isset($_FILES['myprofile']) && isset($_POST['submission_data']) && isset($_P
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <div class="row mb-4 mt-4 mx-auto my-3 ">
             <div class="col-lg-11 col-md-11 mb-md-0 mb-4 text-center fs-3 text-dark mx-auto">
-                <div><?php echo $instit_fetched_array['schoolname'] ?> - Create Students</div>
+                <div><?php echo $instit_fetched_array['schoolname'] ?> - Create Students - SMPL</div>
             </div>
         </div>
         <div class="mb-3">
@@ -134,7 +138,7 @@ if (isset($_FILES['myprofile']) && isset($_POST['submission_data']) && isset($_P
                                         </div>
                                         <div class="col-12">
                                             <div class="upload-btn-wrapper">
-                                                <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="" id="stu-roll" placeholder="<?php echo $instit_fetched_array['schoolidcode'] ?>012001" name="sturoll" required />
+                                                <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="<?php echo $instit_fetched_array['schoolidcode'] ?>" id="stu-roll" placeholder="<?php echo $instit_fetched_array['schoolidcode'] ?>012001" name="sturoll" required />
                                             </div>
                                         </div>
                                     </div>
