@@ -19,7 +19,8 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
 
 
 //Receiving data
-if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_POST['submit'])) {
+if (isset($_FILES['myprofile']) && isset($_POST['submission_data']) && isset($_POST['submit'])) {
+
 
     $data_recv = $_POST['submission_data'];
     $newdata = json_decode($data_recv, true, 1024);
@@ -37,7 +38,19 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
 
         //Creating a directory  that particular student's data
         mkdir("/var/www/student_crm/data/students/$instit/$roller", 0777, TRUE);
+
+        $path_to = "/var/www/student_crm/data/students/$instit/$roller/";
+
         include "./scripts/picture_up.php";
+
+        $picname = $roller . $curr_date . $curr_time . '.' . $imageFileType;
+        
+        include "./scripts/uploader.php";
+
+
+
+        echo "<script>console.log('success point')</script>";
+        echo "<script>console.log('sucess point... 2')</script>";
 
         
 
@@ -49,7 +62,9 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
 
 
 
-        echo "<script>console.log('sucess point   ". $_SERVER['DOCUMENT_ROOT']."')</script>";
+
+
+        echo "<script>console.log('End point of Top Script')</script>";
     }
 }
 
@@ -101,16 +116,16 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
             </div>
         </div>
         <div class="mb-3">
-            <form action="" method="POST" style="padding-bottom: 3em;" oninput="jsonupdater()" onload="jsonupdater()">
+            <form action="" method="POST" style="padding-bottom: 3em;" oninput="jsonupdater()" onload="jsonupdater()" enctype="multipart/form-data">
                 <div class="row mb-4 mt-4 mx-auto my-3 ">
-                    <div class="col-lg-11 col-md-11 mb-md-0 mb-4 text-left fs-5 font-weight-bolder text-dark mx-auto">
+                    <div class="col-xl-9 col-lg-11 col-md-11 mb-md-0 mb-4 text-left fs-5 font-weight-bolder text-dark mx-auto">
                         <div>Student Main Inforamtion</div>
                     </div>
                 </div>
                 <div class="header-body">
                     <div class="row container mx-auto">
                         <div class="col-xl-5 col-lg-6 col-sm-12 row">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -125,7 +140,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                                     </div>
                                 </div>
                             </div>
-                            <div class="card card-stats mb-4 mt-4 mb-xl-0 col-12">
+                            <div class="card card-stats mb-4 mt-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -175,8 +190,8 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
 
                     <!-- Layer 1 start -->
                     <div class="row container mx-auto mt-4">
-                        <div class="col-xl-5 col-lg-6 col-sm-12 row ">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info ">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -191,8 +206,8 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                         </div>
                         <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
                         </div>
-                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 row ms-lg-0">
+                            <div class="card card-stats mb-4 mb-xl-0  col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -211,7 +226,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Replica end -->
 
                     <div class="row mb-4 mt-4 mx-auto my-3 ">
-                        <div class="col-lg-11 col-md-11 mb-md-0 mb-4 text-left fs-5 font-weight-bolder text-dark mx-auto">
+                        <div class="col-xl-9 col-lg-11 col-md-11 mb-md-0 mb-4 text-left fs-5  font-weight-bolder text-dark mx-auto">
                             <div>Student Biological Inforamtion</div>
                         </div>
                     </div>
@@ -219,7 +234,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Layer 2 start -->
                     <div class="row container mx-auto mt-4">
                         <div class="col-xl-5 col-lg-6 col-sm-12 row ">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -234,8 +249,8 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                         </div>
                         <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
                         </div>
-                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-lg-0 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -266,7 +281,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Layer 3 start -->
                     <div class="row container mx-auto mt-4">
                         <div class="col-xl-5 col-lg-6 col-sm-12 row ">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -281,15 +296,15 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                         </div>
                         <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
                         </div>
-                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-lg-0 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
                                             <h5 class="card-title font-weight-bold  mb-0">Student with Disability</h5>
                                         </div>
                                         <div class="col-12 row">
-                                            <div class="col-1 form-check my-auto" style="width: 30px;">
+                                            <div class="col-lg-1 col-sm-2 form-check my-auto" style="width: 30px;">
                                                 <input class="form-check-input rounded-25" style="width: 30px; height: 30px;border: 1px solid rgba(50, 50, 50, 1);" type="checkbox" value="" id="stu-pwd" name="stu-pwd" onclick="pwdchecker()" onchange="pwdchecker()" onforminput="pwdchecker()" />
                                                 <script>
                                                     pwd = document.getElementById("stu-pwd");
@@ -305,7 +320,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                                                     }
                                                 </script>
                                             </div>
-                                            <div class="col-10 ms-3">
+                                            <div class="col-lg-10 col-sm-10 ms-3">
                                                 <input class="form-control rounded-25" style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" type="text" value="" id="stu-pwd-issue" placeholder="Type Your Issue" name="stupwdissue" />
                                             </div>
                                         </div>
@@ -319,7 +334,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Layer 4 start -->
                     <div class="row container mx-auto mt-4">
                         <div class="col-xl-5 col-lg-6 col-sm-12 row ">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -334,8 +349,8 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                         </div>
                         <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
                         </div>
-                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-lg-0 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -352,7 +367,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Layer 4 End -->
 
                     <div class="row mb-4 mt-4 mx-auto my-3 ">
-                        <div class="col-lg-11 col-md-11 mb-md-0 mb-4 text-left fs-5 font-weight-bolder text-dark mx-auto">
+                        <div class="col-xl-9 col-lg-11 col-md-11 mb-md-0 mb-4 text-left fs-5 font-weight-bolder text-dark mx-auto">
                             <div>Student Educational Inforamtion</div>
                         </div>
                     </div>
@@ -360,7 +375,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Layer 10 start -->
                     <div class="row container mx-auto mt-4">
                         <div class="col-xl-5 col-lg-6 col-sm-12 row ">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -390,8 +405,8 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                         </div>
                         <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
                         </div>
-                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-lg-0 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -422,7 +437,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Layer 11 start -->
                     <div class="row container mx-auto mt-4">
                         <div class="col-xl-5 col-lg-6 col-sm-12 row ">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -437,8 +452,8 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                         </div>
                         <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
                         </div>
-                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-lg-0 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -455,7 +470,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Layer 11 End -->
 
                     <div class="row mb-4 mt-4 mx-auto my-3 ">
-                        <div class="col-lg-11 col-md-11 mb-md-0 mb-4 text-left fs-5 font-weight-bolder text-dark mx-auto">
+                        <div class="col-xl-9 col-lg-11 col-md-11 mb-md-0 mb-4 text-left fs-5 font-weight-bolder text-dark mx-auto">
                             <div>Student Contact Inforamtion</div>
                         </div>
                     </div>
@@ -463,7 +478,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Layer 5 start -->
                     <div class="row container mx-auto mt-4">
                         <div class="col-xl-5 col-lg-6 col-sm-12 row ">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -478,8 +493,8 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                         </div>
                         <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
                         </div>
-                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-lg-0 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -498,7 +513,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Layer 6 start -->
                     <div class="row container mx-auto mt-4">
                         <div class="col-xl-5 col-lg-6 col-sm-12 row ">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -516,7 +531,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Layer 6 End -->
 
                     <div class="row mb-4 mt-4 mx-auto my-3 ">
-                        <div class="col-lg-11 col-md-11 mb-md-0 mb-4 text-left fs-5 font-weight-bolder text-dark mx-auto">
+                        <div class="col-xl-9 col-lg-11 col-md-11 mb-md-0 mb-4 text-left fs-5 font-weight-bolder text-dark mx-auto">
                             <div>Student Parents Inforamtion</div>
                         </div>
                     </div>
@@ -524,7 +539,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Layer 7 start -->
                     <div class="row container mx-auto mt-4">
                         <div class="col-xl-5 col-lg-6 col-sm-12 row ">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -539,8 +554,8 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                         </div>
                         <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
                         </div>
-                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-lg-0 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -560,7 +575,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Layer 8 start -->
                     <div class="row container mx-auto mt-4">
                         <div class="col-xl-5 col-lg-6 col-sm-12 row ">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -585,8 +600,8 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                         </div>
                         <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
                         </div>
-                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-lg-0 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -615,7 +630,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Layer 9 start -->
                     <div class="row container mx-auto mt-4">
                         <div class="col-xl-5 col-lg-6 col-sm-12 row ">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -630,8 +645,8 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                         </div>
                         <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
                         </div>
-                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-lg-0 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -650,7 +665,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <!-- Layer 11 start -->
                     <div class="row container mx-auto mt-4">
                         <div class="col-xl-5 col-lg-6 col-sm-12 row ">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -665,8 +680,8 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                         </div>
                         <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
                         </div>
-                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
-                            <div class="card card-stats mb-4 mb-xl-0 col-12">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 ms-lg-0 row">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                 <div class="card-body d-flex align-items-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -707,7 +722,7 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                     <div id="guardian">
                         <div class="row container mx-auto mt-4">
                             <div class="col-xl-5 col-lg-6 col-sm-12 row ">
-                                <div class="card card-stats mb-4 mb-xl-0 col-12">
+                                <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                     <div class="card-body d-flex align-items-center">
                                         <div class="row">
                                             <div class="col-12">
@@ -722,8 +737,8 @@ if (isset($_POST['myprofile']) && isset($_POST['submission_data']) && isset($_PO
                             </div>
                             <div class=" col-xl-2 col-lg-0 d-lg-none d-xl-block">
                             </div>
-                            <div class="col-xl-5 col-lg-6 col-sm-12 ms-0 row">
-                                <div class="card card-stats mb-4 mb-xl-0 col-12">
+                            <div class="col-xl-5 col-lg-6 col-sm-12 ms-lg-0 row">
+                                <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
                                     <div class="card-body d-flex align-items-center">
                                         <div class="row">
                                             <div class="col-12">

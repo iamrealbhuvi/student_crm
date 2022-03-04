@@ -84,19 +84,18 @@ function jsonupdater() {
 
     }
     
-    if (inps.length !== count) {
-        subbtn.setAttribute('disabled', 'true');
-    } else if(inps.length >= count){
-        subbtn.removeAttribute('disabled');
-    }
+    // if (inps.length !== count) {
+    //     subbtn.setAttribute('disabled', 'true');
+    // } else if(inps.length >= count){
+    //     subbtn.removeAttribute('disabled');
+    // }
 
 
 }
 
 function jsonsubmitter() {
     finalout.value = JSON.stringify(mangamadaya);
-    console.log("final value from final out: ");
-    console.log(finalout.value);
+    
 }
 
 
