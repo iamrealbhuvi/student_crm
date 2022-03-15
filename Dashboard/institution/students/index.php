@@ -166,7 +166,7 @@ $instit_meta_info_array = mysqli_fetch_assoc($instit_meta_info_result);
                         </a>
                     </div>
                     <div class="col-xl-3 col-lg-6">
-                        <a class="text-decoration-none" href="./editstudent/">
+                        <a class="text-decoration-none" href="./edit_intermediate.php">
                             <div class="card card-stats mb-4 mb-xl-0">
                                 <div class="card-body">
                                     <div class="row">

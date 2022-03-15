@@ -17,7 +17,7 @@ if (isset($_POST['instit-submit']) && isset($_POST['instit-user']) && isset($_PO
 		$instit_result_verifier = mysqli_fetch_assoc($instit_result);
 		if ($instit_result_verifier) {
 			$_SESSION['instit'] = $instit_user;
-			header("Location: ./Dashboard/schools/school.dashboard.php");
+			header("Location: ./Dashboard/institution/");
 		}
 		if (!$instit_result_verifier) {
 			echo "<script>alert('The username or password is incorrect')</script>";

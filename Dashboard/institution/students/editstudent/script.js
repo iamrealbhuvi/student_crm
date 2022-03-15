@@ -35,6 +35,10 @@ let subbtn = document.getElementById('subbtn');
 
 let mangamadaya = {}
 
+let inps = [rollnum, stuName, stuFaName, stuMaName, stuBldGrp, stuDob, stuPwd,
+    stuIdMark1, stuIdMark2, stuCont1, stuCont2, stuAddr, stuClass, stuEduGrp, stuAcaYear,
+    stuPass, stuFaQual, stuMaQual, stuFaOccuType, stuMaOccuType, stuFaOccu, stuMaOccu,
+    stuAnnInc, stuCaredBy, stuGen];
 
 
 function jsonupdater() {
@@ -69,11 +73,7 @@ function jsonupdater() {
         stugen: stuGen,
     }
 
-    let inps = [rollnum, stuName, stuFaName, stuMaName, stuBldGrp, stuDob, stuPwd,
-        stuIdMark1, stuIdMark2, stuCont1, stuCont2, stuAddr, stuClass, stuEduGrp, stuAcaYear,
-        stuPass, stuFaQual, stuMaQual, stuFaOccuType, stuMaOccuType, stuFaOccu, stuMaOccu,
-        stuAnnInc, stuCaredBy, stuGen];
-
+    
     let i = 0;
     let count = 0;
 
@@ -104,3 +104,8 @@ function jsonsubmitter() {
 window.addEventListener('load', () => {
     jsonupdater();
 })
+
+
+
+
+

@@ -62,6 +62,16 @@ if (isset($_FILES['myprofile']) && isset($_POST['submission_data']) && isset($_P
         $ext_tbl_query = mysqli_query($conn, $ext_tbl_sql);
 
 
+        // Updating school Total students
+
+        $scl_info_fetch_sql = "SELECT * FROM `school_account_info` WHERE `schoolusername` = '$instit'";
+        $scl_info_fetch_result = mysqli_query($conn, $scl_info_fetch_sql);
+        $scl_info_array = mysqli_fetch_assoc($scl_info_fetch_result);
+        $scl_info_array['used_stu_count'] += 1;
+        $scl_info_update_sql = "UPDATE `school_account_info` SET `used_stu_count` = '" . $scl_info_array['used_stu_count'] . "' WHERE `schoolusername` = '$instit'";
+        $scl_info_update_req = mysqli_query($conn, $scl_info_update_sql);
+
+
         echo "<script>console.log('success point')</script>";
         echo "<script>console.log('sucess point... 2')</script>";
 
@@ -76,7 +86,7 @@ if (isset($_FILES['myprofile']) && isset($_POST['submission_data']) && isset($_P
 
 
 
-//To create a table student[roll]_extras [ heading, content ]
+
 
 
 
@@ -369,6 +379,31 @@ if (isset($_FILES['myprofile']) && isset($_POST['submission_data']) && isset($_P
                         </div>
                     </div>
                     <!-- Layer 4 End -->
+
+
+                    <!-- Layer 4.5 start -->
+                    <div class="row container mx-auto mt-4">
+                        <div class="col-xl-5 col-lg-6 col-sm-12 row ">
+                            <div class="card card-stats mb-4 mb-xl-0 col-12 border-5 border-top-0 border-start-0 border-end-0 border-bottom border-info">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 class="card-title font-weight-bold  mb-0">Student Gender<span style="color: red;">&ast;</span></h5>
+                                        </div>
+                                        <div class="col-12">
+                                            <select style="border: 1px solid rgba(50, 50, 50, 1); padding: 10px;" class="form-control rounded-25" id="stu-gen" name="stu-gen" required>
+                                                <option>Select Gender</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Non-Binary">Non - Binary</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Layer 4.5 End -->
 
                     <div class="row mb-4 mt-4 mx-auto my-3 ">
                         <div class="col-xl-9 col-lg-11 col-md-11 mb-md-0 mb-4 text-left fs-5 font-weight-bolder text-dark mx-auto">
